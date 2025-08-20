@@ -1,29 +1,95 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="page" data-aos="fade-up">
-  <div class="page-header"><h1>Dashboard</h1></div>
-  <div class="grid">
-    <div class="col col-12 col-md-6">
-      <div class="card">
-        <h3>Datasets</h3>
-        <div id="datasetList" class="dataset-list"></div>
+<div class="page" data-aos="fade-up" style="padding: 16px;">
+  <!-- Page Header -->
+  <div class="page-header" style="margin-bottom: 24px;">
+    <h1 style="font-weight: 600; font-size: 1.8rem; color: var(--md-sys-color-on-surface);">
+      Dashboard
+    </h1>
+  </div>
+
+  <!-- Material Grid Layout -->
+  <div class="mui-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px;">
+
+    <!-- Datasets Card -->
+    <div class="mui-card" style="
+      background: var(--md-sys-color-surface);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    ">
+      <h3 style="margin-bottom: 12px; font-size: 1.2rem; color: var(--md-sys-color-on-surface);">
+        Datasets
+      </h3>
+      <div id="datasetList" class="dataset-list" style="max-height: 300px; overflow-y: auto;">
+        <!-- Dataset items will be injected here -->
       </div>
     </div>
-    <div class="col col-12 col-md-6">
-      <div class="card">
-        <h3>Quick Stats</h3>
-        <canvas id="catChart" aria-label="Top categorical"></canvas>
-      </div>
+
+    <!-- Quick Stats Card -->
+    <div class="mui-card" style="
+      background: var(--md-sys-color-surface);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    ">
+      <h3 style="margin-bottom: 12px; font-size: 1.2rem; color: var(--md-sys-color-on-surface);">
+        Quick Stats
+      </h3>
+      <canvas id="catChart" aria-label="Top categorical" style="max-height: 300px;"></canvas>
     </div>
-    <div class="col col-12">
-      <div class="card">
-        <h3>Preview</h3>
-        <div id="tablePreview" class="table-preview"></div>
+
+    <!-- Table Preview Card -->
+    <div class="mui-card" style="
+      background: var(--md-sys-color-surface);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      grid-column: 1 / -1;
+    ">
+      <h3 style="margin-bottom: 12px; font-size: 1.2rem; color: var(--md-sys-color-on-surface);">
+        Preview
+      </h3>
+      <div id="tablePreview" class="table-preview" style="overflow-x: auto;">
+        <!-- Table preview data will be injected here -->
       </div>
     </div>
   </div>
 </div>
 {% endblock %}
+
 {% block scripts %}
+<!-- Dashboard JS -->
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<!-- Chart.js Setup -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const ctx = document.getElementById("catChart");
+    if (ctx) {
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [],
+          datasets: [{
+            label: "Top Categories",
+            data: [],
+            backgroundColor: "rgba(103, 80, 164, 0.7)",
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            x: { ticks: { color: "#79747E" } },
+            y: { ticks: { color: "#79747E" } }
+          }
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}

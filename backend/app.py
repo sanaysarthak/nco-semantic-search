@@ -35,6 +35,7 @@ col_audit = db.nco_audit
 
 indexer = NCOIndexer(INDEX_DIR, MODEL_NAME)
 
+
 # ----------- Pages -----------
 @app.route('/')
 def dashboard_page():
