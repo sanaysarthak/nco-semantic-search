@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page" data-aos="fade-up">
+  <div class="page-header"><h1>Dashboard</h1></div>
+  <div class="grid">
+    <div class="col col-12 col-md-6">
+      <div class="card">
+        <h3>Datasets</h3>
+        <div id="datasetList" class="dataset-list"></div>
+      </div>
+    </div>
+    <div class="col col-12 col-md-6">
+      <div class="card">
+        <h3>Quick Stats</h3>
+        <canvas id="catChart" aria-label="Top categorical"></canvas>
+      </div>
+    </div>
+    <div class="col col-12">
+      <div class="card">
+        <h3>Preview</h3>
+        <div id="tablePreview" class="table-preview"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

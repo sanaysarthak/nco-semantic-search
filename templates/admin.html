@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page" data-aos="fade-up">
+  <div class="page-header"><h1>Admin — NCO Management</h1></div>
+  <div class="grid">
+    <div class="col col-12">
+      <div class="card">
+        <h3>1) Ingest NCO Data</h3>
+        <p class="muted">Upload NCO-2015 (CSV/XLSX). Required: <code>code</code>, <code>title</code>, <code>description</code>. Optional: <code>division, group, subgroup, minor, unit</code>.</p>
+        <form id="ingestForm" class="form-row">
+          <input id="ncoFile" type="file" accept=".csv,.xlsx,.xls" />
+          <button class="mdl-button mdl-js-button mdl-button--raised">Upload</button>
+          <span id="ingestMsg" class="muted"></span>
+        </form>
+      </div>
+    </div>
+
+    <div class="col col-12">
+      <div class="card">
+        <h3>2) Build / Rebuild Semantic Index</h3>
+        <button id="buildBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Build Index</button>
+        <span id="buildMsg" class="muted"></span>
+      </div>
+    </div>
+
+    <div class="col col-12">
+      <div class="card">
+        <h3>3) Synonym & Related Terms</h3>
+        <form id="synForm" class="form-row">
+          <input id="synFor" placeholder="for (base word) e.g., tailor"/>
+          <input id="synTerm" placeholder="term (related) e.g., sewing"/>
+          <button class="mdl-button mdl-js-button">Add</button>
+        </form>
+        <div id="synList" class="dataset-list"></div>
+      </div>
+    </div>
+
+    <div class="col col-12">
+      <div class="card">
+        <h3>4) Audit Trail (recent)</h3>
+        <div id="auditList" class="table-preview"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
